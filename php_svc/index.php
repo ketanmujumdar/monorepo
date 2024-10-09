@@ -12,7 +12,7 @@ $request_uri = $_SERVER['REQUEST_URI'];
 
 switch ($request_uri) {
     case '/':
-    case '/api':
+    case '/php_svc':
         $response = [
             'message' => 'Hello from the PHP API!',
             'timestamp' => date('Y-m-d H:i:s'),

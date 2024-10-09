@@ -1,0 +1,36 @@
+services:
+  gateway:
+    build: 
+      context: ./gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - go-api
+      - python-api
+      - php-api
+
+  go-api:
+    build: 
+      context: ./go_svc
+      dockerfile: Dockerfile
+    expose:
+      - "8080"
+
+  python-api:
+    build: 
+      context: ./python_svc
+      dockerfile: Dockerfile
+    expose:
+      - "8080"
+
+  php-api:
+    build: 
+      context: ./php_svc
+      dockerfile: Dockerfile
+    expose:
+      - "8080"
+
+networks:
+  default:
+    name: api-network

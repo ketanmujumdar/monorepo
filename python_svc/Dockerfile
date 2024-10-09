@@ -5,7 +5,7 @@ FROM python:3.12-slim
 WORKDIR /app
 
 # Install Flask
-RUN pip install --no-cache-dir flask==3.0.0
+RUN pip install --no-cache-dir flask==3.0.0 requests==2.31.0
 
 # Copy the current directory contents into the container at /app
 COPY . /app
