@@ -2,8 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
+	"io"
 	"log"
 	"net/http"
+	"os"
 )
 
 // Response represents the structure of our JSON response
@@ -25,8 +28,29 @@ func main() {
 func handleAPI(w http.ResponseWriter, r *http.Request) {
 	// Create a response
 	response := Response{
-		Message: "Hello from the GO API!",
+		Message: "Hello from the GO API! This is a stable env API, calling PHP Stable API",
 	}
+
+	//call PHP API
+	// set request URL and port in environment
+
+	url := os.Getenv("PHP_API_URL")
+	port := os.Getenv("PHP_API_PORT")
+
+	// create request
+	req, err := http.NewRequest("GET", url+":"+port+"/php-api", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer req.Body.Close()
+
+	body, err := io.ReadAll(req.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(string(body))
 
 	// Set the content type to JSON
 	w.Header().Set("Content-Type", "application/json")
