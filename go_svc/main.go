@@ -18,7 +18,7 @@ type Response struct {
 func main() {
 
 	// Define the API route
-	http.HandleFunc("/go_svc", handleAPI)
+	http.HandleFunc("/", handleAPI)
 
 	// Start the server
 	log.Println("Server starting on port 8080...")
